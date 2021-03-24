@@ -31,7 +31,7 @@ app.get("/api/notes/:id", function (req, res) {
         queryNote = noteData.filter(note => note.id === parseInt(req.params.id))
         res.json(queryNote[0]);
     }else{
-        res.status(400).json({msg: `${req.params.id} not in the database!`}.msg)
+        res.status(400).json({msg: `Id ${req.params.id} not in the database!`}.msg)
     }
 });
 
