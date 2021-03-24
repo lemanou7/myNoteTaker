@@ -23,8 +23,16 @@ app.get('/api/notes', (req, res) => {
 });
 
 app.get("/api/notes/:id", function (req, res) {
-    let noteData = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
-    res.json(noteData[parseInt(req.params.id)]);
+    // let noteData = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
+    let noteData = allNotes.slice(1);
+    const found = noteData.some(note => note.id === parseInt(req.params.id));
+    let queryNote ={};
+    if (found){
+        queryNote = noteData.filter(note => note.id === parseInt(req.params.id))
+        res.json(queryNote[0]);
+    }else{
+        res.status(400).json({msg: `${req.params.id} not in the database!`}.msg)
+    }
 });
 
 app.post('/api/notes', (req, res) => {
