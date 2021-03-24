@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 //Function call 
-const {createNewNote, deleteNote} = require('./lib/notesCreationFunctions');
+const {createNote, deleteNote} = require('./lib/notesCreationFunctions');
 
 //Server setup
 const express = require('express');
@@ -28,7 +28,7 @@ app.get("/api/notes/:id", function (req, res) {
 });
 
 app.post('/api/notes', (req, res) => {
-    const newNote =createNewNote(req.body, allNotes);
+    const newNote =createNote(req.body, allNotes);
     res.json(newNote);
 });
 
